@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-on-background antialiased;
+    font-family: "Plus Jakarta Sans", "IBM Plex Sans Arabic", sans-serif;
+  }
+  /* Arabic headings + numerals use IBM Plex Sans Arabic. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+  }
+}
+
+@layer components {
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    user-select: none;
+  }
+  .icon-filled {
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+  }
+
+  /* Container matching the sample's fluid max-width layout. */
+  .container-fluid {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+  @media (min-width: 768px) {
+    .container-fluid {
+      padding-inline: 32px;
+    }
+  }
+
+  /* Hatched pattern for private/internal transparency data. */
+  .bg-hatched {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 4px,
+      rgba(226, 232, 240, 0.5) 4px,
+      rgba(226, 232, 240, 0.5) 8px
+    );
+  }
+
+  .soft-shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* Mirror directional icons for RTL (arrows, chevrons). */
+.rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Thin, unobtrusive scrollbars. */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #bfc9c2;
+  border-radius: 9999px;
+}

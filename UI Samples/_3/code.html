@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>منصة الخير - المشاريع</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#002117",
+                        "status-returned": "#8B5CF6",
+                        "status-pending": "#F59E0B",
+                        "secondary-container": "#b6d0ff",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#00522f",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-container": "#0d5c46",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface": "#191c1e",
+                        "on-secondary-fixed": "#001b3c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#002110",
+                        "on-primary-container": "#8cd2b6",
+                        "status-completed": "#0D5C46",
+                        "on-surface-variant": "#3f4944",
+                        "on-secondary": "#ffffff",
+                        "outline": "#6f7974",
+                        "transparency-private": "#E2E8F0",
+                        "tertiary-fixed": "#91f8b8",
+                        "on-primary-fixed-variant": "#00513d",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed-variant": "#2d476f",
+                        "surface-container": "#eceef0",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-container": "#71d79a",
+                        "tertiary-fixed-dim": "#74db9d",
+                        "inverse-primary": "#8ed5b9",
+                        "primary-fixed": "#aaf1d4",
+                        "status-approved": "#10B981",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d3133",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "status-rejected": "#EF4444",
+                        "on-secondary-container": "#3f5882",
+                        "status-draft": "#64748B",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "background": "#f7f9fb",
+                        "primary-fixed-dim": "#8ed5b9",
+                        "secondary-fixed-dim": "#adc7f7",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-tint": "#226a53",
+                        "tertiary": "#004325",
+                        "primary": "#004331",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#bfc9c2",
+                        "secondary": "#455f88",
+                        "tertiary-container": "#005d36",
+                        "status-delayed": "#B91C1C"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "container-max-width": "1280px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "code-ref": ["JetBrains Mono"],
+                        "headline-sm": ["IBM Plex Sans Arabic"],
+                        "label-md": ["IBM Plex Sans Arabic"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["40px", { "lineHeight": "52px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "code-ref": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden min-h-screen flex flex-col">
+<!-- TopNavBar (Web) -->
+<header class="hidden md:flex bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline docked full-width top-0 z-50">
+<div class="flex flex-row-reverse justify-between items-center w-full px-margin-desktop max-w-container-max-width mx-auto py-stack-md">
+<!-- Brand -->
+<div class="flex items-center gap-stack-sm flex-row-reverse">
+<img alt="Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5NoBGBPzLM3uj9mlgD3BVK6fI9WoVE__RxDuaelYdcyFrPpkmmUVkp1hInLGAr0r6PpJztoZN0SI5p05RDocVD8XwIt_nhb_W01AV-IbHJTahDlskWBsJ68lHoO8q12TPjfRhLA6-LvT2UN6BklKnW92abrkRF5aAzNN_i5aNhWCkvKtJG8sNrhDpxDyZLKZObMJHzIqQ3xblbYW1KiEp4xgghEd1G5NncZs13IMNnGd1u-cE2Q86lNSio2DzXjdc3BIiePWX2hk"/>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">منصة الخير</span>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-row-reverse items-center gap-stack-lg">
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1 text-label-md font-label-md transition-colors hover:opacity-80" href="#">المشاريع</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-md font-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">عن المنصة</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-md font-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">التقارير</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-stack-md flex-row-reverse">
+<!-- Search (Conceptual placement based on JSON 'on_right' -> RTL on_left relative to nav) -->
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container rounded-full border-none text-body-sm font-body-sm focus:ring-2 focus:ring-primary outline-none transition-all w-64 text-right" dir="rtl" placeholder="البحث..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area with Sidebar Layout -->
+<div class="flex flex-1 relative max-w-container-max-width mx-auto w-full">
+<!-- SideNavBar (Desktop Dashboard Layout) -->
+<!-- Suppressed strictly per mandate: This is not a dashboard specific view but a public project listing intent based on standard UX flow, but the prompt implies a system view with standard sidebar given the JSON provided. Let's include it for the dashboard context as requested by the source JSON structure, but in a real public facing 'Explore' page it might be suppressed. Assuming this is an internal 'Project Management' or 'Donation Tracking' portal based on the specific JSON SideNavBar provided. -->
+<aside class="hidden lg:flex bg-surface-container-low dark:bg-inverse-surface border-l border-outline-variant dark:border-outline docked fixed right-0 h-full w-[280px] flex-col z-40 py-stack-md px-4 overflow-y-auto">
+<!-- Sidebar Header -->
+<div class="flex flex-col items-center gap-stack-sm mb-stack-lg mt-stack-lg">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="صورة الملف الشخصي" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-eastern man in business casual attire, well-lit studio photography, neutral background, modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgc7NNUb0hfqyoDSXhiafzlBJNBJlmHYjzFn70jLwyKmqJo1ReLgnFpcgJis6PZc2ykH-QLOvZ9Q-1K4EicRVepXZ1FgAKDt-GKplwliuED5MllQdY0YU-6SToQ1F-nK_sGwIv3ExRTpVLc6mKHqZ8b_tDK0WyqFG9kukrANSsgs7JFE3LzM0yA2Cvzs7FlfHBlHJIL7j2jVXBHG4gJPn8S-7xVL1IFNh6RzSWbbObEQjuhCMsq8dkF2wmjadrBT9eRoNP99lEdnk"/>
+</div>
+<h2 class="text-headline-sm font-headline-sm font-bold text-primary text-center">لوحة التحكم</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-center">إدارة المشاريع الخيرية</p>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col gap-unit">
+<a class="flex flex-row-reverse items-center gap-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl p-3 hover:opacity-90 transition-all duration-150 transform active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+<span class="text-label-md font-label-md">التنفيذ</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-3 text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-md font-label-md">المالية</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-3 text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-md font-label-md">التقارير</span>
+</a>
+<a class="flex flex-row-reverse items-center gap-3 text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-label-md font-label-md">الأسهم</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="mt-auto pt-stack-lg">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl text-label-md font-label-md font-bold hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2 flex-row-reverse shadow-[0_4px_12px_rgba(0,67,49,0.1)]">
+<span class="material-symbols-outlined">add</span>
+                    مساهمة جديدة
+                </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 w-full lg:pr-[280px] p-margin-mobile md:p-margin-desktop bg-surface-bright flex flex-col gap-stack-lg">
+<!-- Page Header & Filters -->
+<section class="flex flex-col gap-stack-md">
+<h1 class="text-headline-lg font-headline-lg font-bold text-primary">استعراض المشاريع</h1>
+<!-- Advanced Filters Bar -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col md:flex-row-reverse gap-4 items-center shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+<!-- Search Input -->
+<div class="relative w-full md:w-1/3">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pr-10 pl-4 py-2.5 bg-surface rounded-lg border border-outline-variant text-body-sm font-body-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-right" dir="rtl" placeholder="ابحث عن مشروع..." type="text"/>
+</div>
+<!-- Category Filter -->
+<div class="relative w-full md:w-auto flex-1">
+<select class="w-full appearance-none pl-10 pr-4 py-2.5 bg-surface rounded-lg border border-outline-variant text-body-sm font-body-sm text-on-surface-variant focus:ring-2 focus:ring-primary outline-none text-right cursor-pointer" dir="rtl">
+<option value="">جميع التصنيفات</option>
+<option value="mosques">بناء مساجد</option>
+<option value="wells">حفر آبار</option>
+<option value="families">دعم أسر</option>
+</select>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+<!-- Location Filter -->
+<div class="relative w-full md:w-auto flex-1">
+<select class="w-full appearance-none pl-10 pr-4 py-2.5 bg-surface rounded-lg border border-outline-variant text-body-sm font-body-sm text-on-surface-variant focus:ring-2 focus:ring-primary outline-none text-right cursor-pointer" dir="rtl">
+<option value="">الموقع</option>
+<option value="riyadh">الرياض</option>
+<option value="jeddah">جدة</option>
+<option value="dammam">الدمام</option>
+</select>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">location_on</span>
+</div>
+<!-- Completion Filter -->
+<div class="relative w-full md:w-auto flex-1">
+<select class="w-full appearance-none pl-10 pr-4 py-2.5 bg-surface rounded-lg border border-outline-variant text-body-sm font-body-sm text-on-surface-variant focus:ring-2 focus:ring-primary outline-none text-right cursor-pointer" dir="rtl">
+<option value="">نسبة الإنجاز</option>
+<option value="0-25">٠٪ - ٢٥٪</option>
+<option value="25-50">٢٥٪ - ٥٠٪</option>
+<option value="50-75">٥٠٪ - ٧٥٪</option>
+<option value="75-100">٧٥٪ - ١٠٠٪</option>
+</select>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">donut_large</span>
+</div>
+<!-- Filter Action -->
+<button class="w-full md:w-auto bg-surface-container-high text-primary px-6 py-2.5 rounded-lg text-label-md font-label-md font-bold hover:bg-surface-variant transition-colors flex items-center justify-center gap-2 flex-row-reverse border border-outline-variant">
+<span class="material-symbols-outlined">filter_list</span>
+                        تصفية
+                    </button>
+</div>
+</section>
+<!-- Projects Grid (Bento/Card Style) -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-transform hover:-translate-y-1 duration-300">
+<div class="relative h-48 w-full bg-surface-container-high overflow-hidden">
+<div class="bg-cover bg-center w-full h-full" data-alt="A wide architectural shot of a modern, newly constructed mosque in a sunny Middle Eastern landscape. The building features clean lines, white stone, and a distinct minaret. Bright natural daylight, highly detailed, photorealistic, professional architectural photography style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA93q8onmTTvj37SnFWwGDPF1cACNzP3zAVVPKHMbsvWDs5lvOYz996F4LbYcs2QDTixre9Ioeq9_5SAgHocH_MXwBB2jZ6vO0KvxG0jvxXih6vKbrvTek2nbgSaRq8Hp07cCu_-btNCWbOUR0XmRcHrKV6ywIATv-0IO1Swxd0wOirrVI0UGWiIMgLa098uUM4aRjokt7EtgHSTRK_9V6CztUVkpaoOC7FEVBIK9KOFLxFwSqz3WY2SmXSa7BJRFY-36bhFZu_8lU')"></div>
+<div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-sm rounded-full p-2 cursor-pointer hover:bg-surface transition-colors shadow-sm">
+<span class="material-symbols-outlined text-secondary">share</span>
+</div>
+<div class="absolute top-3 right-3 bg-status-approved/10 backdrop-blur-md px-3 py-1 rounded-full border border-status-approved/30">
+<span class="text-[12px] font-bold text-status-completed">بناء مساجد</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2 flex-row-reverse">
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface line-clamp-1 text-right w-full">مسجد النور - حي الياسمين</h3>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4 text-right">جمعية البر الأهلية بالرياض</p>
+<!-- Progress Section -->
+<div class="mt-auto flex flex-col gap-3">
+<!-- Financial Progress -->
+<div>
+<div class="flex justify-between items-end mb-1 flex-row-reverse">
+<span class="text-label-md font-label-md text-on-surface">المالي</span>
+<span class="text-code-ref font-code-ref text-primary font-bold">٧٥٪</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 75%"></div>
+</div>
+<div class="flex justify-between mt-1 text-[12px] text-on-surface-variant flex-row-reverse">
+<span>المستهدف: ١,٥٠٠,٠٠٠ ر.س</span>
+<span>المحصل: ١,١٢٥,٠٠٠ ر.س</span>
+</div>
+</div>
+<!-- Execution Progress -->
+<div>
+<div class="flex justify-between items-end mb-1 flex-row-reverse">
+<span class="text-label-md font-label-md text-on-surface">التنفيذي</span>
+<span class="text-code-ref font-code-ref text-secondary font-bold">٤٠٪</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 40%"></div>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="mt-5 w-full bg-surface text-primary border border-primary py-2 rounded-lg text-label-md font-label-md font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors">
+                            التفاصيل
+                        </button>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-transform hover:-translate-y-1 duration-300">
+<div class="relative h-48 w-full bg-surface-container-high overflow-hidden">
+<div class="bg-cover bg-center w-full h-full" data-alt="A close-up shot of clean, fresh water pouring from a newly installed metal pump into a rustic bucket in a dry village setting. Warm sunlight, hopeful mood, high contrast, professional documentary style photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDEkjS_uOQtPewpovx0tXVkalN_SlfM4m7TuXul0GuXTOoTGbwda8OhKUtz0FFSlMuPvsJROlvcQGbR34zH6fvtSbxQpPsoxcWvl2G8UpsJvupR_wZRp23GMHX_-OuvdiO_I2n_UqExgbesi782ngxr9F0EUP6Ut3VpNwhJXPbHOPLONtasa9o7QgllM31hVkqXfElUhWY3z47A3Gp0-GhnOqtijVh4A-ecD9UbokK_rgEUq1mRqnvtw61OeDp4eGWlcst7pxkr2Yk')"></div>
+<div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-sm rounded-full p-2 cursor-pointer hover:bg-surface transition-colors shadow-sm">
+<span class="material-symbols-outlined text-secondary">share</span>
+</div>
+<div class="absolute top-3 right-3 bg-secondary-container/80 backdrop-blur-md px-3 py-1 rounded-full border border-secondary/30">
+<span class="text-[12px] font-bold text-on-secondary-container">حفر آبار</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2 flex-row-reverse">
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface line-clamp-1 text-right w-full">بئر الارتواء الإرتوازي</h3>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4 text-right">مؤسسة السقيا الخيرية</p>
+<!-- Progress Section -->
+<div class="mt-auto flex flex-col gap-3">
+<!-- Financial Progress -->
+<div>
+<div class="flex justify-between items-end mb-1 flex-row-reverse">
+<span class="text-label-md font-label-md text-on-surface">المالي</span>
+<span class="text-code-ref font-code-ref text-primary font-bold">١٠٠٪</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-status-approved h-full rounded-full" style="width: 100%"></div>
+</div>
+<div class="flex justify-between mt-1 text-[12px] text-on-surface-variant flex-row-reverse">
+<span>المستهدف: ٤٥,٠٠٠ ر.س</span>
+<span>مكتمل</span>
+</div>
+</div>
+<!-- Execution Progress -->
+<div>
+<div class="flex justify-between items-end mb-1 flex-row-reverse">
+<span class="text-label-md font-label-md text-on-surface">التنفيذي</span>
+<span class="text-code-ref font-code-ref text-secondary font-bold">٩٠٪</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="mt-5 w-full bg-surface text-primary border border-primary py-2 rounded-lg text-label-md font-label-md font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors">
+                            التفاصيل
+                        </button>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col shadow-[0_4px_12px_rgba(0,0,0,0.04)] transition-transform hover:-translate-y-1 duration-300">
+<div class="relative h-48 w-full bg-surface-container-high overflow-hidden">
+<div class="bg-cover bg-center w-full h-full" data-alt="A heartwarming, well-lit interior shot of a modest home where food supplies and essential goods are neatly stacked. Soft, natural light coming through a window. Compassionate, professional editorial photography style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCZaiXFg1t-bf3P_8hHZLei8VB8z081eFyCAa5B0xukzO_M07i2gsF9VgnTWub6qhxeI6pjFQs9UWyzul1XPiwxcqEb-SU2i4xmVAnIkhNM6lio4DG2H2uTYfQpqWqm7aDaUxXPWZCgfrkhKMZ87IpUlvGOK3M3FghPXnVq2mgen7MIY6XVT8sdlhc_h1ue8CSCDjFW0qi8lSDhAAHqXeLtlEoWmhTdCQxPE-LnvzLhWiofMwH0AmzcP3D5n2eXO2NGa3AMIs88CiI')"></div>
+<div class="absolute top-3 left-3 bg-surface/80 backdrop-blur-sm rounded-full p-2 cursor-pointer hover:bg-surface transition-colors shadow-sm">
+<span class="material-symbols-outlined text-secondary">share</span>
+</div>
+<div class="absolute top-3 right-3 bg-status-pending/10 backdrop-blur-md px-3 py-1 rounded-full border border-status-pending/30">
+<span class="text-[12px] font-bold text-status-pending">دعم أسر</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2 flex-row-reverse">
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface line-clamp-1 text-right w-full">كفالة أيتام - المرحلة الثالثة</h3>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4 text-right">جمعية إنسان</p>
+<!-- Progress Section -->
+<div class="mt-auto flex flex-col gap-3">
+<!-- Financial Progress -->
+<div>
+<div class="flex justify-between items-end mb-1 flex-row-reverse">
+<span class="text-label-md font-label-md text-on-surface">المالي</span>
+<span class="text-code-ref font-code-ref text-primary font-bold">٢٠٪</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 20%"></div>
+</div>
+<div class="flex justify-between mt-1 text-[12px] text-on-surface-variant flex-row-reverse">
+<span>المستهدف: ٥٠٠,٠٠٠ ر.س</span>
+<span>المحصل: ١٠٠,٠٠٠ ر.س</span>
+</div>
+</div>
+<!-- Execution Progress -->
+<div>
+<div class="flex justify-between items-end mb-1 flex-row-reverse">
+<span class="text-label-md font-label-md text-on-surface">التنفيذي</span>
+<span class="text-code-ref font-code-ref text-secondary font-bold">٥٪</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 5%"></div>
+</div>
+</div>
+</div>
+<!-- Action Button (Primary for low funding) -->
+<button class="mt-5 w-full bg-tertiary-container text-on-tertiary-container py-2 rounded-lg text-label-md font-label-md font-bold hover:bg-primary transition-colors shadow-sm">
+                            ساهم الآن
+                        </button>
+</div>
+</article>
+</section>
+<!-- Pagination -->
+<section class="flex justify-center items-center mt-stack-lg gap-2 flex-row-reverse">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold shadow-sm">١</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors">٢</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors">٣</button>
+<span class="text-on-surface-variant mx-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors">١٢</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline full-width z-50">
+<div class="w-full py-stack-lg px-margin-desktop flex flex-col md:flex-row-reverse justify-between items-center gap-stack-md max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2 flex-row-reverse mb-4 md:mb-0">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed">منصة الخير</span>
+<span class="text-body-sm font-body-sm text-on-surface dark:text-inverse-on-surface">© ٢٠٢٤ منصة الخير للإدارة الشفافة. جميع الحقوق محفوظة.</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 flex-row-reverse">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">عن المنصة</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">سياسة الخصوصية</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">تواصل معنا</a>
+<a class="text-primary font-bold hover:text-primary-container transition-colors text-label-md font-label-md" href="#">تبرع الآن</a>
+</nav>
+</div>
+</footer>
+</body></html>

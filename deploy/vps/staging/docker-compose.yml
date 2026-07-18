@@ -1,0 +1,51 @@
+# Staging/test deployment on the ozeidi.io VPS (compose project: khair-staging).
+# Lives on the server at /root/apps/khair-staging/docker-compose.yml.
+# Same topology as prod (see ../prod/docker-compose.yml) but the `staging` image,
+# a `khair-staging` network alias, its own DB, and demo data seeded on first boot.
+services:
+  app:
+    image: ghcr.io/ozeidi/khair:staging
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      SEED_DEMO: "1"                 # seed demo accounts/projects on the test site
+    volumes:
+      - media:/app/media
+    networks:
+      frontend:
+        aliases: [khair-staging]     # nginx proxy_pass http://khair-staging:8000
+      backend: {}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/ready/"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+
+  worker:
+    image: ghcr.io/ozeidi/khair:staging
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+    command: >
+      bash -c "while true; do
+        python manage.py process_outbox || true;
+        python manage.py send_due_reminders || true;
+        sleep 60;
+      done"
+    volumes:
+      - media:/app/media
+    networks:
+      backend: {}
+
+volumes:
+  media:
+
+networks:
+  frontend:
+    external: true
+    name: stack_frontend
+  backend:
+    external: true
+    name: stack_backend

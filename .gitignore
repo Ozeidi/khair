@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+
+# Django
+*.sqlite3
+db.sqlite3
+/media/
+/staticfiles/
+/static/frontend/
+.env
+*.log
+
+# Node / Vite
+node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Server-wide ops doc — not app-specific; keep out of the app repo
+VPS_Handover.md

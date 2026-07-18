@@ -1,0 +1,67 @@
+# Production-shaped compose: one app container + external PostgreSQL (DECISIONS §11).
+# For a quick demo without Postgres, unset DATABASE_URL and the app uses a SQLite volume.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: khair
+      POSTGRES_USER: khair
+      POSTGRES_PASSWORD: khair_password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U khair"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      DEBUG: "False"
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://localhost:8000}
+      DATABASE_URL: postgres://khair:khair_password@db:5432/khair
+      FIELD_ENCRYPTION_KEY: ${FIELD_ENCRYPTION_KEY:-}
+      WHATSAPP_BACKEND: ${WHATSAPP_BACKEND:-console}
+      SECURE_SSL_REDIRECT: "False"
+      SEED_DEMO: ${SEED_DEMO:-1}
+    ports:
+      - "8000:8000"
+    volumes:
+      - media_data:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/ready/"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # Scheduled jobs (Outbox + reminders) as a lightweight supervisor loop (DECISIONS §11).
+  worker:
+    build: .
+    command: >
+      bash -c "while true; do
+        python manage.py process_outbox || true;
+        python manage.py send_due_reminders || true;
+        sleep 60;
+      done"
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      DATABASE_URL: postgres://khair:khair_password@db:5432/khair
+      FIELD_ENCRYPTION_KEY: ${FIELD_ENCRYPTION_KEY:-}
+      WHATSAPP_BACKEND: ${WHATSAPP_BACKEND:-console}
+    volumes:
+      - media_data:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
+  media_data:

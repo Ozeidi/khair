@@ -1,0 +1,41 @@
+# Keep the Docker build context small & secret-free.
+.git
+.gitignore
+.github
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Local DB / media / logs / secrets
+*.sqlite3
+db.sqlite3
+/media/
+*.log
+.env
+.env.*
+
+# Node — the frontend is built inside the image (stage 1), so never ship host modules/dist
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+node_modules/
+
+# Pre-built static (collected inside the image)
+/static/frontend/
+/staticfiles/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Docs & deploy scaffolding not needed at runtime
+deploy/
+*.md
+!README.md

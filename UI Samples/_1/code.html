@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>لوحة تحكم المساهم - منصة الخير</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#002117",
+                        "status-returned": "#8B5CF6",
+                        "status-pending": "#F59E0B",
+                        "secondary-container": "#b6d0ff",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#00522f",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-container": "#0d5c46",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface": "#191c1e",
+                        "on-secondary-fixed": "#001b3c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#002110",
+                        "on-primary-container": "#8cd2b6",
+                        "status-completed": "#0D5C46",
+                        "on-surface-variant": "#3f4944",
+                        "on-secondary": "#ffffff",
+                        "outline": "#6f7974",
+                        "transparency-private": "#E2E8F0",
+                        "tertiary-fixed": "#91f8b8",
+                        "on-primary-fixed-variant": "#00513d",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed-variant": "#2d476f",
+                        "surface-container": "#eceef0",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-container": "#71d79a",
+                        "tertiary-fixed-dim": "#74db9d",
+                        "inverse-primary": "#8ed5b9",
+                        "primary-fixed": "#aaf1d4",
+                        "status-approved": "#10B981",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d3133",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "status-rejected": "#EF4444",
+                        "on-secondary-container": "#3f5882",
+                        "status-draft": "#64748B",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "background": "#f7f9fb",
+                        "primary-fixed-dim": "#8ed5b9",
+                        "secondary-fixed-dim": "#adc7f7",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-tint": "#226a53",
+                        "tertiary": "#004325",
+                        "primary": "#004331",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#bfc9c2",
+                        "secondary": "#455f88",
+                        "tertiary-container": "#005d36",
+                        "status-delayed": "#B91C1C"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "container-max-width": "1280px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "code-ref": ["JetBrains Mono"],
+                        "headline-sm": ["IBM Plex Sans Arabic"],
+                        "label-md": ["IBM Plex Sans Arabic"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["40px", { "lineHeight": "52px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "code-ref": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col fixed right-0 top-0 h-screen w-[280px] z-40 py-stack-md px-4 overflow-y-auto bg-surface-container-low border-l border-outline-variant">
+<div class="flex items-center gap-3 mb-stack-lg px-2">
+<img alt="صورة الملف الشخصي" class="w-12 h-12 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5NoBGBPzLM3uj9mlgD3BVK6fI9WoVE__RxDuaelYdcyFrPpkmmUVkp1hInLGAr0r6PpJztoZN0SI5p05RDocVD8XwIt_nhb_W01AV-IbHJTahDlskWBsJ68lHoO8q12TPjfRhLA6-LvT2UN6BklKnW92abrkRF5aAzNN_i5aNhWCkvKtJG8sNrhDpxDyZLKZObMJHzIqQ3xblbYW1KiEp4xgghEd1G5NncZs13IMNnGd1u-cE2Q86lNSio2DzXjdc3BIiePWX2hk"/>
+<div>
+<h2 class="text-headline-sm font-headline-sm font-bold text-primary">لوحة التحكم</h2>
+<p class="text-label-md font-label-md text-on-surface-variant">إدارة المشاريع الخيرية</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex flex-row-reverse items-center justify-between p-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all" href="#">
+<div class="flex flex-row-reverse items-center gap-3">
+<span class="material-symbols-outlined">pending_actions</span>
+<span class="text-label-md font-label-md">التنفيذ</span>
+</div>
+</a>
+<a class="flex flex-row-reverse items-center justify-between p-3 bg-secondary-container text-on-secondary-container rounded-xl transition-all scale-95 duration-150" href="#">
+<div class="flex flex-row-reverse items-center gap-3">
+<span class="material-symbols-outlined icon-filled">payments</span>
+<span class="text-label-md font-label-md font-bold">المالية</span>
+</div>
+</a>
+<a class="flex flex-row-reverse items-center justify-between p-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all" href="#">
+<div class="flex flex-row-reverse items-center gap-3">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-md font-label-md">التقارير</span>
+</div>
+</a>
+<a class="flex flex-row-reverse items-center justify-between p-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all" href="#">
+<div class="flex flex-row-reverse items-center gap-3">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-label-md font-label-md">الأسهم</span>
+</div>
+</a>
+</nav>
+<div class="mt-auto pt-stack-md border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded-full text-label-md font-label-md font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
+                مساهمة جديدة
+                <span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex flex-row-reverse justify-between items-center w-full px-margin-mobile py-stack-sm bg-surface border-b border-outline-variant sticky top-0 z-30">
+<div class="flex items-center gap-2">
+<img alt="Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5NoBGBPzLM3uj9mlgD3BVK6fI9WoVE__RxDuaelYdcyFrPpkmmUVkp1hInLGAr0r6PpJztoZN0SI5p05RDocVD8XwIt_nhb_W01AV-IbHJTahDlskWBsJ68lHoO8q12TPjfRhLA6-LvT2UN6BklKnW92abrkRF5aAzNN_i5aNhWCkvKtJG8sNrhDpxDyZLKZObMJHzIqQ3xblbYW1KiEp4xgghEd1G5NncZs13IMNnGd1u-cE2Q86lNSio2DzXjdc3BIiePWX2hk"/>
+<span class="text-headline-md font-headline-md font-bold text-primary">منصة الخير</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 md:mr-[280px] p-margin-mobile md:p-margin-desktop w-full max-w-container-max-width mx-auto space-y-stack-lg">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant pb-stack-md">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">مرحباً، عبدالله</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-1">نظرة عامة على مساهماتك الخيرية والتزاماتك المالية.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-high text-on-surface py-2 px-4 rounded-lg text-label-md font-label-md flex items-center gap-2 border border-outline-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    كشف حساب كامل
+                </button>
+</div>
+</div>
+<!-- Financial Summary Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Total Commitments -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant shadow-[0_4px_12px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-container rounded-lg text-on-secondary-container">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">إجمالي الالتزامات</span>
+</div>
+<div>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">150,000 <span class="text-body-sm font-body-sm text-on-surface-variant">ر.س</span></h3>
+</div>
+</div>
+<!-- Paid -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant shadow-[0_4px_12px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">المدفوع</span>
+</div>
+<div>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">85,000 <span class="text-body-sm font-body-sm text-on-surface-variant">ر.س</span></h3>
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 56%"></div>
+</div>
+</div>
+</div>
+<!-- Remaining -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant shadow-[0_4px_12px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container-high rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined">hourglass_empty</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">المتبقي</span>
+</div>
+<div>
+<h3 class="text-headline-lg font-headline-lg text-on-surface">65,000 <span class="text-body-sm font-body-sm text-on-surface-variant">ر.س</span></h3>
+</div>
+</div>
+<!-- Overdue -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-status-rejected/30 shadow-[0_4px_12px_rgba(239,68,68,0.04)] flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-status-rejected/5 -mr-8 -mt-8 rounded-full"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="p-2 bg-status-rejected/10 rounded-lg text-status-rejected">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="text-label-md font-label-md text-status-rejected font-bold">المتأخر</span>
+</div>
+<div class="relative z-10">
+<h3 class="text-headline-lg font-headline-lg text-status-rejected">5,000 <span class="text-body-sm font-body-sm opacity-80">ر.س</span></h3>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Left Column: Upcoming Dues & Digital Receipts -->
+<div class="lg:col-span-1 space-y-gutter">
+<!-- Upcoming Dues -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0_4px_12px_rgba(0,0,0,0.04)] p-stack-md">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">الاستحقاقات القادمة</h2>
+<span class="material-symbols-outlined text-on-surface-variant">event</span>
+</div>
+<div class="space-y-4">
+<!-- Due Item -->
+<div class="p-3 border border-outline-variant rounded-lg bg-surface flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-label-md font-label-md font-bold text-on-surface">بناء مسجد النور</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">القسط الثالث - سهم ذهبي</p>
+</div>
+<span class="text-label-md font-label-md font-bold text-on-surface">2,500 ر.س</span>
+</div>
+<div class="flex justify-between items-center pt-2 border-t border-outline-variant">
+<span class="text-body-sm font-body-sm text-status-rejected flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                                    مستحق منذ 3 أيام
+                                </span>
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-label-md font-label-md hover:bg-primary/90 transition-colors">دفع الآن</button>
+</div>
+</div>
+<!-- Due Item -->
+<div class="p-3 border border-outline-variant rounded-lg bg-surface flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-label-md font-label-md font-bold text-on-surface">كفالة أيتام (سنة)</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">دفعة شهر أكتوبر</p>
+</div>
+<span class="text-label-md font-label-md font-bold text-on-surface">500 ر.س</span>
+</div>
+<div class="flex justify-between items-center pt-2 border-t border-outline-variant">
+<span class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                                    يستحق في 15 أكتوبر
+                                </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Digital Receipts -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0_4px_12px_rgba(0,0,0,0.04)] p-stack-md">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">الإيصالات الرقمية</h2>
+<a class="text-label-md font-label-md text-primary hover:underline" href="#">عرض الكل</a>
+</div>
+<ul class="space-y-2">
+<li class="flex items-center justify-between p-2 hover:bg-surface rounded-lg transition-colors group cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-surface-container-high rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface">إيصال #REC-1042</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">12 سبتمبر 2024</p>
+</div>
+</div>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</button>
+</li>
+<li class="flex items-center justify-between p-2 hover:bg-surface rounded-lg transition-colors group cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-surface-container-high rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface">إيصال #REC-0988</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">05 أغسطس 2024</p>
+</div>
+</div>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</button>
+</li>
+</ul>
+</section>
+</div>
+<!-- Right Column: Subscriptions & Updates -->
+<div class="lg:col-span-2 space-y-gutter">
+<!-- My Subscriptions Table -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0_4px_12px_rgba(0,0,0,0.04)] overflow-hidden">
+<div class="p-stack-md border-b border-outline-variant flex justify-between items-center">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">قائمة اشتراكاتي</h2>
+<button class="text-label-md font-label-md text-secondary hover:text-secondary/80 flex items-center gap-1">
+                            تصفية
+                            <span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right">
+<thead class="bg-surface-container-low text-label-md font-label-md text-on-surface-variant border-b border-outline-variant">
+<tr>
+<th class="p-4 font-medium">اسم المشروع</th>
+<th class="p-4 font-medium">نوع السهم</th>
+<th class="p-4 font-medium">الحالة</th>
+<th class="p-4 font-medium w-[30%]">التقدم (المالي / التنفيذ)</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md text-on-surface divide-y divide-outline-variant">
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean, professional close-up of architectural blueprints for a modern community center, shot from directly above. The lighting is bright and evenly distributed, creating a crisp light-mode aesthetic. A sleek silver pen rests diagonally across the subtle grid lines of the paper. The color palette is minimal, focusing on whites, soft grays, and the faint blue of the blueprint ink." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ_aZsyhMIkBN8iNp8bXGPoyr0Bn6mngyObvNvj9I9g-04EDTlLvRLQHTLC2vwnbhLes2b4Hw07WfPRGr72Y7Y9Wb9PH4hdjJycr2ZiB3KAaKK9qYgfl4Q2WLah5r6I6UReEfQHkVwgnwSZveD7VZEpzwoyInyT-EDRPbrube1hVOGKnA_bwd0gDihIBF45BbD3P5a7ixj5hoSPKlwdVzU08rkF0ivRzuqD8aCC3WdxHb1sHErlyaeabY1f4YqT7HS8EYvCMEn-to"/>
+</div>
+<span class="font-bold">بناء مركز مجتمعي</span>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">سهم ذهبي</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded text-[12px] font-bold bg-status-approved/10 text-status-approved">نشط</span>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 80%"></div>
+</div>
+<span class="text-[12px] text-primary w-8">80%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 45%"></div>
+</div>
+<span class="text-[12px] text-secondary w-8">45%</span>
+</div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-high overflow-hidden">
+<div class="w-full h-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+</div>
+<span class="font-bold">حفر بئر مياه</span>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">مساهمة جزئية</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded text-[12px] font-bold bg-status-completed/10 text-status-completed">مكتمل مالياً</span>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 100%"></div>
+</div>
+<span class="text-[12px] text-primary w-8">100%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 90%"></div>
+</div>
+<span class="text-[12px] text-secondary w-8">90%</span>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Project Updates -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0_4px_12px_rgba(0,0,0,0.04)] p-stack-md">
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-stack-md">آخر تحديثات المشاريع</h2>
+<div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-outline-variant before:to-transparent pr-8">
+<!-- Update Item -->
+<div class="relative flex items-start gap-4">
+<div class="absolute right-[-40px] top-1 w-6 h-6 rounded-full bg-surface border-2 border-primary z-10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div class="flex-1 bg-surface p-4 rounded-lg border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-md font-label-md font-bold text-primary">حفر بئر مياه</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">اليوم، 10:30 ص</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface">تم الانتهاء من مرحلة الحفر الأساسية والبدء في تمديد الأنابيب. نسبة الإنجاز الفعلي وصلت إلى 90%.</p>
+<div class="mt-3 flex gap-2">
+<img class="w-20 h-20 rounded object-cover border border-outline-variant" data-alt="A bright, clear daytime photo showing the construction site of a modern water well in a rural area. Freshly laid concrete and clean metal pipes are visible. The setting is arid but lit with optimistic, high-key sunlight, emphasizing progress and clean engineering. The overall color palette features earthy tones contrasted with crisp white and metallic silver, fitting a light-mode layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhbCsCXlgOYULYqK6j9HiE5kfpOIYmeXrQulUlH6kN2bAcDCIVKis31EEtPWLC3F26noxkCfG5JP09u374a3eRXW9jLjWz1HDn4UqBU_8Stqt1bSyHMpvxi_FfXs6pGa_0SyUxnI_KmV_Haj7vJkb3zhdxtuNAYzjrRKN8nxXnHg5bePQcAWdX6z8J-jcbC2tSoglL2zibTQQuZJKpP1e2MUV4IWVjR0SOJJ2e1cVnpOXIpoiNXEfF3YXkg1trTvGzK0IYkKdTJqk"/>
+</div>
+</div>
+</div>
+<!-- Update Item -->
+<div class="relative flex items-start gap-4">
+<div class="absolute right-[-40px] top-1 w-6 h-6 rounded-full bg-surface border-2 border-outline-variant z-10 flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="flex-1 bg-surface p-4 rounded-lg border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-md font-label-md font-bold text-on-surface">بناء مركز مجتمعي</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">12 أكتوبر 2024</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface">تم اعتماد المخططات الهندسية النهائية من الجهات المختصة والبدء في تجهيز الموقع للأساسات.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-desktop flex flex-col md:flex-row-reverse justify-between items-center gap-stack-md bg-surface-container-highest border-t border-outline-variant mt-auto z-10 relative">
+<div class="text-headline-sm font-headline-sm font-bold text-primary">منصة الخير</div>
+<div class="flex gap-4">
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">عن المنصة</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">سياسة الخصوصية</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">تواصل معنا</a>
+<a class="text-label-md font-label-md text-primary font-bold hover:text-primary transition-colors" href="#">تبرع الآن</a>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">© ٢٠٢٤ منصة الخير للإدارة الشفافة. جميع الحقوق محفوظة.</div>
+</footer>
+</body></html>
