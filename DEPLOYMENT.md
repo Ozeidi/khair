@@ -66,8 +66,11 @@ dig +short khair-test.ozeidi.io
    gh secret set SSH_HOST       -b "169.58.33.14"
    gh secret set SSH_USER       -b "root"
    gh secret set SSH_DEPLOY_KEY < ci_deploy_key      # the PRIVATE key
+   # Pin the VPS host key so CI verifies it (no blind accept-new). Verified value:
+   gh secret set SSH_KNOWN_HOSTS -b "169.58.33.14 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDVEtjif/fFx61DVig/GvEmVU3/oOstnKEXMWIBEdBay"
    rm -f ci_deploy_key ci_deploy_key.pub             # keep only the GitHub copy
    ```
+   > Re-verify the host key any time with `ssh-keyscan -t ed25519 169.58.33.14`.
 
 4. **GitHub Environments** `production` and `staging` (Settings → Environments). Optional but recommended: add a **required reviewer** on `production` so prod deploys need approval. (The workflow already targets these environments.)
 
@@ -112,10 +115,11 @@ Set `DATABASE_URL` to the dedicated db/user from step (a).
 ```bash
 # scp deploy/vps/nginx/khair.conf      → /root/stack/nginx/conf.d/khair.conf
 # scp deploy/vps/nginx/khair-test.conf → /root/stack/nginx/conf.d/khair-test.conf
-# IMPORTANT: match the ACME `location /.well-known/acme-challenge/` root to the
-# existing vhosts — copy that block verbatim from /root/stack/nginx/conf.d/mail.conf.
 docker exec nginx nginx -t && docker exec nginx nginx -s reload
 ```
+> The vhosts' ACME `root /var/www/certbot;` is **verified correct** — the nginx
+> container mounts `/root/stack/nginx/certbot-webroot → /var/www/certbot`, matching
+> every existing vhost (mail/pgadmin/portainer/uptime-kuma). No edit needed.
 
 ---
 

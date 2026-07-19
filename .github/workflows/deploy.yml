@@ -7,6 +7,9 @@ on:
     branches: [main, develop]
   workflow_dispatch:
 
+# Deny-all by default; each job opts into exactly what it needs.
+permissions: {}
+
 concurrency:
   group: deploy-${{ github.ref }}
   cancel-in-progress: true
@@ -23,12 +26,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Resolve image name + environment tag
+      - name: Resolve image name + environment tag (fail-closed on unknown branch)
         id: meta
+        env:
+          REF: ${{ github.ref_name }}
+          OWNER: ${{ github.repository_owner }}
         run: |
+          set -euo pipefail
           # GHCR requires an all-lowercase image path.
-          IMAGE="ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/khair"
-          if [ "${{ github.ref_name }}" = "main" ]; then TAG=prod; else TAG=staging; fi
+          IMAGE="ghcr.io/$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')/khair"
+          case "$REF" in
+            main)    TAG=prod ;;
+            develop) TAG=staging ;;
+            *) echo "::error::Refusing to build/deploy from branch '$REF' (only main/develop)."; exit 1 ;;
+          esac
           echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG"     >> "$GITHUB_OUTPUT"
 
@@ -55,7 +66,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # Requires GitHub Environments "production" / "staging" with the deploy secrets.
+    permissions:
+      contents: read
+    # Requires GitHub Environments "production" / "staging" holding the deploy secrets.
     environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
     steps:
       - name: Deploy over SSH (pull + up on the VPS)
@@ -63,13 +76,26 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          REF: ${{ github.ref_name }}
         run: |
-          printf '%s\n' "$SSH_DEPLOY_KEY" > deploy_key
-          chmod 600 deploy_key
-          DIR=${{ github.ref_name == 'main' && '/root/apps/khair-prod' || '/root/apps/khair-staging' }}
-          ssh -i deploy_key \
+          set -euo pipefail
+          KEYFILE="$RUNNER_TEMP/deploy_key"
+          KNOWN="$RUNNER_TEMP/known_hosts"
+          trap 'rm -f "$KEYFILE" "$KNOWN"' EXIT          # always clean up, even on failure
+
+          printf '%s\n' "$SSH_DEPLOY_KEY"  > "$KEYFILE"; chmod 600 "$KEYFILE"
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > "$KNOWN"
+
+          case "$REF" in
+            main)    DIR=/root/apps/khair-prod ;;
+            develop) DIR=/root/apps/khair-staging ;;
+            *) echo "::error::Refusing to deploy from branch '$REF'."; exit 1 ;;
+          esac
+
+          ssh -i "$KEYFILE" \
               -o IdentitiesOnly=yes \
-              -o StrictHostKeyChecking=accept-new \
+              -o StrictHostKeyChecking=yes \
+              -o UserKnownHostsFile="$KNOWN" \
               "${SSH_USER:-root}@${SSH_HOST}" \
               "cd $DIR && docker compose pull && docker compose up -d && docker image prune -f"
-          rm -f deploy_key

@@ -28,10 +28,21 @@ COPY . .
 # Bring in the built SPA assets from stage 1 (vite outDir = ../static/frontend => /static/frontend).
 COPY --from=frontend-build /static/frontend /app/static/frontend
 
-RUN python manage.py collectstatic --noinput
+# Collect static at build under DEV settings so the production fail-fast guards
+# (which require real secrets/DB) don't run here. The WhiteNoise manifest storage
+# is defined in base settings, so the built manifest is identical for production.
+RUN DJANGO_SETTINGS_MODULE=config.settings.development python manage.py collectstatic --noinput
+
+# Drop to a non-root user (least privilege). Do this AFTER all build-time writes,
+# and give it ownership of /app + the media mountpoint (a fresh named volume
+# inherits this ownership on first mount).
+RUN chmod +x entrypoint.sh \
+    && adduser --system --group --uid 10001 appuser \
+    && mkdir -p /app/media \
+    && chown -R appuser:appuser /app
+USER appuser
 
 EXPOSE 8000
 
-RUN chmod +x entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "120"]

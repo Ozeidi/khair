@@ -33,16 +33,24 @@ services:
     env_file: .env
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.production
+      RUN_MIGRATIONS: "0"           # only the app container migrates the shared DB
     command: >
       bash -c "while true; do
         python manage.py process_outbox || true;
         python manage.py send_due_reminders || true;
+        touch /tmp/worker.heartbeat;
         sleep 60;
       done"
     volumes:
       - media:/app/media
     networks:
       backend: {}
+    healthcheck:
+      test: ["CMD-SHELL", "find /tmp/worker.heartbeat -mmin -3 | grep -q ."]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
 
 volumes:
   media:

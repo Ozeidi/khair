@@ -27,16 +27,21 @@ for attempt in range(30):
 print("Database not reachable; continuing anyway.")
 PY
 
-# 2. Apply migrations.
-echo "==> Applying migrations"
-python manage.py migrate --noinput
+# 2. Apply migrations (only the primary/app container; workers set RUN_MIGRATIONS=0
+#    so two containers never migrate the shared DB concurrently).
+if [ "${RUN_MIGRATIONS:-1}" != "0" ]; then
+  echo "==> Applying migrations"
+  python manage.py migrate --noinput
+else
+  echo "==> RUN_MIGRATIONS=0 -> skipping migrations"
+fi
 
-# 3. Collect static (idempotent; assets already built into the image).
-echo "==> Collecting static files"
-python manage.py collectstatic --noinput || true
+# Static files are already collected into the image at build time and served by
+# WhiteNoise, so no runtime collectstatic is needed (also avoids needing a
+# writable STATIC_ROOT under the non-root runtime user).
 
-# 4. Optional demo seed (set SEED_DEMO=1 to populate demo data).
-if [ "${SEED_DEMO:-0}" = "1" ]; then
+# 3. Optional demo seed (set SEED_DEMO=1 to populate demo data). Skipped on workers.
+if [ "${SEED_DEMO:-0}" = "1" ] && [ "${RUN_MIGRATIONS:-1}" != "0" ]; then
   echo "==> Seeding demo data"
   python manage.py seed_demo || true
 fi
