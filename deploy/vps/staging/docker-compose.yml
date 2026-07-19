@@ -17,10 +17,13 @@ services:
         aliases: [khair-staging]     # nginx proxy_pass http://khair-staging:8000
       backend: {}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health/ready/"]
+      # X-Forwarded-Proto avoids the app's HTTPS redirect so we validate the real
+      # readiness view (200 = DB reachable), not just a 301.
+      test: ["CMD", "curl", "-fsS", "-H", "X-Forwarded-Proto: https", "http://localhost:8000/health/ready/"]
       interval: 20s
       timeout: 5s
       retries: 5
+      start_period: 30s
 
   worker:
     image: ghcr.io/ozeidi/khair:staging
