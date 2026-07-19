@@ -30,3 +30,7 @@ npm-debug.log*
 
 # Server-wide ops doc — not app-specific; keep out of the app repo
 VPS_Handover.md
+
+# CI deploy key (never commit)
+ci_deploy_key
+ci_deploy_key.pub
