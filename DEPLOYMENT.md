@@ -29,8 +29,8 @@ Read alongside [`VPS_Handover.md`](VPS_Handover.md) (the server's operations gui
 DreamHost → Manage Domains → DNS for `ozeidi.io`. **Host = prefix only** (it appends `.ozeidi.io`):
 
 ```
-A   khair        → 169.58.33.14
-A   khair-test   → 169.58.33.14
+A   khair        → <VPS_IP>
+A   khair-test   → <VPS_IP>
 ```
 
 Verify before continuing (must return the VPS IP):
@@ -44,11 +44,11 @@ dig +short khair-test.ozeidi.io
 
 ## 2. GitHub repository + secrets
 
-1. **Create & push** (private recommended):
+1. **Create & push**:
    ```bash
    gh auth login                      # if the local token is invalid
    cd /path/to/Khair
-   gh repo create ozeidi/khair --private --source=. --remote=origin --push
+   gh repo create ozeidi/khair --public --source=. --remote=origin --push
    git push -u origin main
    git push origin develop            # create the staging branch too
    ```
@@ -57,20 +57,20 @@ dig +short khair-test.ozeidi.io
    ```bash
    ssh-keygen -t ed25519 -f ./ci_deploy_key -N '' -C 'github-actions-khair'
    # authorize it on the VPS:
-   ssh -i ~/.ssh/id_ozeidi_vps root@169.58.33.14 \
+   ssh -i ~/.ssh/id_ozeidi_vps root@<VPS_IP> \
      "echo '$(cat ci_deploy_key.pub)' >> /root/.ssh/authorized_keys"
    ```
 
 3. **Repository secrets** (used by both environments):
    ```bash
-   gh secret set SSH_HOST       -b "169.58.33.14"
+   gh secret set SSH_HOST       -b "<VPS_IP>"
    gh secret set SSH_USER       -b "root"
    gh secret set SSH_DEPLOY_KEY < ci_deploy_key      # the PRIVATE key
    # Pin the VPS host key so CI verifies it (no blind accept-new). Verified value:
-   gh secret set SSH_KNOWN_HOSTS -b "169.58.33.14 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDVEtjif/fFx61DVig/GvEmVU3/oOstnKEXMWIBEdBay"
+   gh secret set SSH_KNOWN_HOSTS -b "$(ssh-keyscan -t ed25519 <VPS_IP>)"
    rm -f ci_deploy_key ci_deploy_key.pub             # keep only the GitHub copy
    ```
-   > Re-verify the host key any time with `ssh-keyscan -t ed25519 169.58.33.14`.
+   > Re-verify the host key any time with `ssh-keyscan -t ed25519 <VPS_IP>`.
 
 4. **GitHub Environments** `production` and `staging` (Settings → Environments). Optional but recommended: add a **required reviewer** on `production` so prod deploys need approval. (The workflow already targets these environments.)
 
@@ -78,7 +78,7 @@ dig +short khair-test.ozeidi.io
 
 ## 3. VPS provisioning (once per environment)
 
-SSH in: `ssh -i ~/.ssh/id_ozeidi_vps root@169.58.33.14`
+SSH in: `ssh -i ~/.ssh/id_ozeidi_vps root@<VPS_IP>`
 
 **a) Dedicated Postgres db + user** on the shared instance (per `VPS_Handover.md §7`):
 ```bash
