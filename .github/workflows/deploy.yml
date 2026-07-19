@@ -68,6 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: read           # lets the VPS pull the GHCR image via the job token
     # Requires GitHub Environments "production" / "staging" holding the deploy secrets.
     environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
     steps:
@@ -77,6 +78,8 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REF: ${{ github.ref_name }}
         run: |
           set -euo pipefail
@@ -93,9 +96,12 @@ jobs:
             *) echo "::error::Refusing to deploy from branch '$REF'."; exit 1 ;;
           esac
 
-          ssh -i "$KEYFILE" \
+          # Pipe the ephemeral GHCR token over ssh stdin → docker login --password-stdin
+          # (keeps it out of argv/process list on the VPS). Then pull + recreate.
+          printf '%s' "$GHCR_TOKEN" | ssh -i "$KEYFILE" \
               -o IdentitiesOnly=yes \
               -o StrictHostKeyChecking=yes \
               -o UserKnownHostsFile="$KNOWN" \
               "${SSH_USER:-root}@${SSH_HOST}" \
-              "cd $DIR && docker compose pull && docker compose up -d && docker image prune -f"
+              "docker login ghcr.io -u '$GHCR_USER' --password-stdin \
+               && cd $DIR && docker compose pull && docker compose up -d && docker image prune -f"
